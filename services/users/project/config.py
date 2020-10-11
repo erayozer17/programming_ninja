@@ -5,6 +5,7 @@ class BaseConfig:
     JSONIFY_PRETTYPRINT_REGULAR = False # https://stackoverflow.com/a/63974534
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'my_precious'
 
 
 class TestingConfig(BaseConfig):

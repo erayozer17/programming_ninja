@@ -1,3 +1,5 @@
+import werkzeug
+werkzeug.cached_property = werkzeug.utils.cached_property #https://stackoverflow.com/a/60157748
 from flask import Flask, jsonify
 import os
 from flask_sqlalchemy import SQLAlchemy
