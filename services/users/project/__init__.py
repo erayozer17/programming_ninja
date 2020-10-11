@@ -1,5 +1,4 @@
 # regarding werkzeug import->https://stackoverflow.com/a/60157748 # noqa: E402
-from flask_debugtoolbar import toolbar
 import werkzeug  # noqa: E402
 werkzeug.cached_property = werkzeug.utils.cached_property  # noqa: E402
 from flask import Flask
