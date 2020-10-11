@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/erayozer17/programming_ninja.svg?bran
-ch=master)](https://travis-ci.org/erayozer17/programming_ninja)
+[![Build Status](https://travis-ci.com/erayozer17/programming_ninja.svg?branch=master)](https://travis-ci.com/erayozer17/programming_ninja)
 
 Common Commands
 
