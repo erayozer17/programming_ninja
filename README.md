@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/erayozer17/programming_ninja.svg?bran
+ch=master)](https://travis-ci.org/erayozer17/programming_ninja)
+
 Common Commands
 
 Build the images:
