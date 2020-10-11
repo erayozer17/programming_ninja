@@ -16,6 +16,7 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
+
 @users_blueprint.route('/users', methods=['POST'])
 def add_user():
     post_data = request.get_json()
@@ -42,6 +43,7 @@ def add_user():
         db.session.rollback()
         return jsonify(response_object), 400
 
+
 @users_blueprint.route('/users/<user_id>', methods=['GET'])
 def single_user(user_id):
     """Get single user."""
@@ -62,10 +64,11 @@ def single_user(user_id):
                     'email': user.email,
                     'active': user.active
                 }
-            } 
+            }
             return jsonify(response_object), 200
     except ValueError:
         return jsonify(response_object), 404
+
 
 @users_blueprint.route('/users', methods=['GET'])
 def get_all_users():
@@ -75,8 +78,9 @@ def get_all_users():
         'data': {
             'users': [user.to_json() for user in User.query.all()]
         }
-    } 
+    }
     return jsonify(response_object), 200
+
 
 @users_blueprint.route('/users/ping', methods=['GET'])
 def ping_pong():

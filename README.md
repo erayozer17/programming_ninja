@@ -35,3 +35,12 @@ $ docker rmi $(docker images -q)
 
 To access the database via psql
 $ docker exec -ti users-db psql -U postgres -W
+
+
+Example docker-machine ec2 command
+
+docker-machine create -d amazonec2 \
+--amazonec2-region us-west-2 \
+--amazonec2-instance-type "t2.micro" \
+--amazonec2-ssh-keypath ~/.ssh/ssh_key \
+aws-test
