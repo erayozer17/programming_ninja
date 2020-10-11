@@ -4,6 +4,13 @@ from project.tests.base import BaseTestCase
 from project.api.models import User
 from project import db
 
+
+def add_user(username, email):
+    user = User(username=username, email=email)
+    db.session.add(user)
+    db.session.commit()
+    return user 
+
 class TestUserService(BaseTestCase):
     """Tests for the Users Service."""
     def test_users(self):
@@ -84,9 +91,7 @@ class TestUserService(BaseTestCase):
 
     def test_single_user(self):
         """Ensures it returns correct single user."""
-        user = User(username='eray', email="me@eray-ozer.com")
-        db.session.add(user)
-        db.session.commit()
+        user = add_user('eray', 'me@eray-ozer.com')
         with self.client:
             response = self.client.get(f'/users/{user.id}')
             data = json.loads(response.data.decode())
@@ -103,7 +108,7 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 404)
             self.assertIn('User does not exist', data['message'])
             self.assertIn('fail', data['status'])
-            
+
     def test_single_user_incorrect_id(self):
         """Ensure error is thrown if the id does not exist."""
         with self.client:
@@ -112,6 +117,23 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 404)
             self.assertIn('User does not exist', data['message'])
             self.assertIn('fail', data['status'])
+
+    def test_all_users(self):
+        """Ensure get all users behaves correctly."""
+        add_user('eray', 'me@eray-ozer.com')
+        add_user('ozer', 'you@eray-ozer.com')
+        with self.client:
+            response = self.client.get('/users')
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(data['data']['users']), 2)
+            self.assertIn('eray', data['data']['users'][0]['username'])
+            self.assertIn(
+                'me@eray-ozer.com', data['data']['users'][0]['email'])
+            self.assertIn('ozer', data['data']['users'][1]['username'])
+            self.assertIn(
+                'you@eray-ozer.com', data['data']['users'][1]['email'])
+            self.assertIn('success', data['status'])
 
 if __name__ == '__main__':
     unittest.main()
