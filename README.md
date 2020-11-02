@@ -2,8 +2,10 @@
 
 Common Commands
 
-Build the images:
-$ docker-compose -f docker-compose-dev.yml build
+
+docker-machine start testdriven-dev
+docker-machine env testdriven-dev
+eval $(docker-machine env testdriven-dev)
 
 Run the containers:
 $ docker-compose -f docker-compose-dev.yml up -d
@@ -13,6 +15,9 @@ $ docker-compose -f docker-compose-dev.yml run users python manage.py recreate_d
 
 Seed the database:
 $ docker-compose -f docker-compose-dev.yml run users python manage.py seed_db
+
+Build the images:
+$ docker-compose -f docker-compose-dev.yml build
 
 Run the tests:
 $ docker-compose -f docker-compose-dev.yml run users python manage.py test
@@ -31,12 +36,6 @@ $ docker rmi $(docker images -q)
 
 To access the database via psql
 $ docker exec -ti users-db psql -U postgres -W
-
-Init db
-$ docker-compose -f docker-compose-dev.yml run users python manage.py recreate_db
-
-Seed db
-docker-compose -f docker-compose-dev.yml run users python manage.py seed_db
 
 
 
