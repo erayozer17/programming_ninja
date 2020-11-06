@@ -3,6 +3,7 @@ import werkzeug  # noqa: E402
 werkzeug.cached_property = werkzeug.utils.cached_property  # noqa: E402
 from flask import Flask
 import os
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -14,6 +15,9 @@ toolbar = DebugToolbarExtension()
 # adding the Application Factory pattern
 def create_app(script_info=None):
     app = Flask(__name__)
+
+    CORS(app)
+
     app.config.from_object(os.getenv('APP_SETTINGS'))
 
     # set up extensions
